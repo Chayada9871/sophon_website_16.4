@@ -1,16 +1,15 @@
 {
-  "name": "sophon-market",
+  "name": "sophon-web-monorepo",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "next": "^15.5.15",
-    "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "dev:public": "npm run dev --workspace @sophon/public-site",
+    "dev:staff": "npm run dev --workspace @sophon/staff-site",
+    "build:public": "npm run build --workspace @sophon/public-site",
+    "build:staff": "npm run build --workspace @sophon/staff-site"
   }
 }

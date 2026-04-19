@@ -1,0 +1,15 @@
+{
+  "name": "@sophon/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": [
+    "./styles/*.css"
+  ],
+  "exports": {
+    "./components/site/*": "./src/components/site/*.js",
+    "./lib/site-content": "./src/lib/site-content.js",
+    "./lib/website-content-client": "./src/lib/website-content-client.js",
+    "./styles/globals.css": "./styles/globals.css"
+  }
+}
