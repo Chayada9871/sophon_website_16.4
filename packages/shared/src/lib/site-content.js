@@ -39,13 +39,14 @@ export const storeProfile = {
     "Fresh picks, weekly deals, and easy store contact",
     "สินค้าคัดสรร โปรโมชั่นประจำสัปดาห์ และการติดต่อร้านที่ง่ายขึ้น"
   ),
-  phoneDisplay: "065 262 6861",
-  phoneHref: "tel:0652626861",
+  phoneDisplay: "065 262 6661",
+  phoneHref: "tel:0652626661",
   hours: text("Open daily 07:30 - 19:30", "เปิดทุกวัน 07:30 - 19:30"),
   address: text(
-    "99/9 Moo 6, Phlu Ta Luang, Sattahip, Chon Buri 20150",
-    "99/9 หมู่ 6 ตำบลพลูตาหลวง อำเภอสัตหีบ จังหวัดชลบุรี 20150"
+    "99/9 Moo9 Nongplalai Chonburi Thailand 20150",
+    "99/9 ม.6 หนองปลาไหล บางละมุง ชลบุรี 20150"
   ),
+  facebookUrl: "https://www.facebook.com/sophonsupermarket/",
   mapsUrl: "https://maps.app.goo.gl/sRpQ1VrNCvYdVP1U9",
   mapEmbed: "https://www.google.com/maps?q=https://maps.app.goo.gl/sRpQ1VrNCvYdVP1U9&output=embed",
 };
@@ -599,8 +600,8 @@ export const shoppingChannels = [
       "Call the team for product checks, pickup coordination, and direct support during store hours.",
       "โทรหาทีมงานเพื่อสอบถามสินค้า นัดรับของ และติดต่อโดยตรงในช่วงเวลาเปิดร้าน"
     ),
-    action: text("Call the store", "โทรหาร้าน"),
-    href: "tel:0652626861",
+    action: storeProfile.phoneDisplay,
+    href: "",
     icon: "/assets/tel-icon.png",
   },
   {
@@ -609,8 +610,8 @@ export const shoppingChannels = [
       "Use chat for quick questions, order details, and follow-up after checking brochure items.",
       "ใช้แชตเพื่อสอบถามอย่างรวดเร็ว ส่งรายละเอียดการสั่งซื้อ และติดตามรายการจากโบรชัวร์"
     ),
-    action: text("Open contact page", "ดูช่องทางติดต่อ"),
-    href: "/contact",
+    action: text("Open Line account", "เปิดบัญชี Line"),
+    href: "https://lin.ee/QjZmcXD",
     icon: "/assets/line-icon.png",
   },
   {
@@ -619,8 +620,8 @@ export const shoppingChannels = [
       "Share news, promotions, and store announcements through a familiar social channel.",
       "ติดตามข่าวสาร โปรโมชั่น และประกาศของร้านผ่านช่องทางโซเชียลที่คุ้นเคย"
     ),
-    action: text("View contact options", "ดูช่องทางติดต่อ"),
-    href: "/contact",
+    action: text("Open Facebook page", "เปิดหน้า Facebook"),
+    href: storeProfile.facebookUrl,
     icon: "/assets/fb-icon.png",
   },
 ];

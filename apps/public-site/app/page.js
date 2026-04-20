@@ -63,6 +63,39 @@ function DepartmentCard({ category, ctaLabel }) {
   );
 }
 
+function ServiceChannelCard({ channel }) {
+  const href = String(channel.href || "").trim();
+  const content = (
+    <>
+      <span className="service-channel-icon">
+        <Image src={channel.icon} alt={channel.title} width={22} height={22} />
+      </span>
+      <span className="service-channel-copy">
+        <strong>{channel.title}</strong>
+        <small>{channel.action}</small>
+      </span>
+    </>
+  );
+
+  if (!href) {
+    return <article className="service-channel-card service-channel-card--static">{content}</article>;
+  }
+
+  if (/^https?:\/\//i.test(href)) {
+    return (
+      <a href={href} className="service-channel-card" target="_blank" rel="noreferrer">
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className="service-channel-card">
+      {content}
+    </Link>
+  );
+}
+
 export default function HomePage() {
   const { language } = useLanguage();
   const content = localize(homePageContent, language);
@@ -197,15 +230,7 @@ export default function HomePage() {
 
             <div className="service-channel-list">
               {channels.map((channel) => (
-                <Link key={channel.title} href={channel.href} className="service-channel-card">
-                  <span className="service-channel-icon">
-                    <Image src={channel.icon} alt={channel.title} width={22} height={22} />
-                  </span>
-                  <span className="service-channel-copy">
-                    <strong>{channel.title}</strong>
-                    <small>{channel.action}</small>
-                  </span>
-                </Link>
+                <ServiceChannelCard key={channel.title} channel={channel} />
               ))}
             </div>
 

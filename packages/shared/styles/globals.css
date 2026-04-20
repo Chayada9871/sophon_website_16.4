@@ -875,6 +875,12 @@ input {
   box-shadow: var(--shadow-sm);
 }
 
+.service-channel-card--static:hover {
+  transform: none;
+  border-color: var(--line);
+  box-shadow: none;
+}
+
 .service-channel-icon,
 .contact-icon {
   display: inline-grid;
@@ -974,10 +980,16 @@ input {
 }
 
 .feature-copy a,
-.contact-card a {
+.contact-card a,
+.contact-card-meta {
   margin-top: auto;
   color: var(--accent);
   font-weight: 700;
+}
+
+.contact-card-meta {
+  display: inline-flex;
+  align-items: center;
 }
 
 .category-grid {

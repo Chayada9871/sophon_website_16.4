@@ -14,6 +14,24 @@ import {
   shoppingPageContent,
 } from "@sophon/shared/lib/site-content";
 
+function ContactChannelAction({ channel }) {
+  const href = String(channel.href || "").trim();
+
+  if (!href) {
+    return <span className="contact-card-meta">{channel.action}</span>;
+  }
+
+  if (/^https?:\/\//i.test(href)) {
+    return (
+      <a href={href} target="_blank" rel="noreferrer">
+        {channel.action}
+      </a>
+    );
+  }
+
+  return <Link href={href}>{channel.action}</Link>;
+}
+
 export default function ShoppingPage() {
   const { language } = useLanguage();
   const content = localize(shoppingPageContent, language);
@@ -62,7 +80,7 @@ export default function ShoppingPage() {
               </div>
               <h3>{channel.title}</h3>
               <p>{channel.description}</p>
-              <Link href={channel.href}>{channel.action}</Link>
+              <ContactChannelAction channel={channel} />
             </article>
           ))}
         </div>
