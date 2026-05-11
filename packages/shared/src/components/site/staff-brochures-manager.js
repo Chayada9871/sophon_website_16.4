@@ -145,30 +145,9 @@ function normalizeBrochureItems(items) {
   );
 }
 
-function parseContentDate(value) {
-  if (!value) {
-    return null;
-  }
-
-  const date = new Date(`${value}T00:00:00`);
-  return Number.isNaN(date.getTime()) ? null : date;
-}
-
 function resolveBrochureStatus(item, content) {
   if (item.offline) {
     return { tone: "draft", label: content.shared.localStatus };
-  }
-
-  const date = parseContentDate(item.display_date || item.date || "");
-  if (!date) {
-    return { tone: "draft", label: content.shared.draftStatus };
-  }
-
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  if (date.getTime() > today.getTime()) {
-    return { tone: "draft", label: content.shared.draftStatus };
   }
 
   return { tone: "active", label: content.shared.activeStatus };

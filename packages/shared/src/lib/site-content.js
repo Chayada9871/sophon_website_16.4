@@ -36,14 +36,14 @@ export const storeProfile = {
   name: "Sophon Market",
   storeName: text("Sophon Supermarket", "โสภณซุปเปอร์"),
   tagline: text(
-    "Fresh picks, weekly deals, and easy store contact",
+    "Everyday groceries, weekly deals, and easy store support",
     "สินค้าครบครัน โปรโมชันคุ้มค่า และช่องทางติดต่อร้านที่สะดวก"
   ),
   phoneDisplay: "065 262 6661",
   phoneHref: "tel:0652626661",
   hours: text("Open daily 07:30 - 19:30", "เปิดทุกวัน 07:30 - 19:30"),
   address: text(
-    "99/9 Moo9 Nongplalai Chonburi Thailand 20150",
+    "99/9 Moo 6, Nong Pla Lai, Bang Lamung, Chonburi 20150, Thailand",
     "99/9 ม.6 หนองปลาไหล บางละมุง ชลบุรี 20150"
   ),
   facebookUrl: "https://www.facebook.com/sophonsupermarket/",
@@ -66,25 +66,25 @@ export function getPublicSiteHref(path = "/") {
 
 export const headerContent = {
   topbarLabel: text("Daily support", "ติดต่อร้านทุกวัน"),
-  topbarPromo: text("Fresh promotions", "โปรโมชันเด่น"),
+  topbarPromo: text("Latest promotions", "โปรโมชันเด่น"),
   weeklyBrochure: text("Weekly brochure", "โบรชัวร์ประจำสัปดาห์"),
   openBrochure: text("Open brochure", "เปิดโบรชัวร์"),
   contactStore: text("Contact store", "ติดต่อร้าน"),
   searchPlaceholder: text(
-    "Search departments, brochure, or promotions",
+    "Search products, departments, or promotions",
     "ค้นหาสินค้า หมวดหมู่ หรือโปรโมชัน"
   ),
   searchButton: text("Browse", "ค้นหา"),
   languageLabel: text("Language", "ภาษา"),
   navNote: text(
-    "Brochure, promotions, and pickup support in one place.",
+    "Find promotions, weekly brochure updates, and store contact details in one place.",
     "รวมโปรโมชันล่าสุด โบรชัวร์ประจำสัปดาห์ และข้อมูลติดต่อร้านไว้ครบในที่เดียว"
   ),
 };
 
 export const footerContent = {
   description: text(
-    "Grocery essentials, weekly deals, and easy store contact in one place.",
+    "Plan your visit with grocery categories, weekly deals, and clear ways to contact the store.",
     "เลือกซื้อสินค้าจำเป็นในชีวิตประจำวัน พร้อมติดตามโปรโมชันประจำสัปดาห์และช่องทางติดต่อร้าน"
   ),
   exploreHeading: text("Explore", "สำรวจเว็บไซต์"),
@@ -99,7 +99,7 @@ export const navItems = [
   { href: "/", label: text("Home", "หน้าแรก") },
   { href: "/products", label: text("Products", "สินค้า") },
   { href: "/promotions", label: text("Promotions", "โปรโมชัน") },
-  { href: "/shopping", label: text("Online Order", "สั่งซื้อออนไลน์") },
+  { href: "/shopping", label: text("How to Order", "สั่งซื้อออนไลน์") },
   { href: "/contact", label: text("Contact", "ติดต่อเรา") },
 ];
 
@@ -112,7 +112,7 @@ export const staffNavItems = [
 export const heroStats = [
   { value: "8", label: text("popular departments", "หมวดหมู่ยอดนิยม") },
   { value: "7:30 - 19:30", label: text("daily opening hours", "เวลาเปิดทำการ") },
-  { value: text("Fast", "รวดเร็ว"), label: text("phone and chat support", "รองรับโทรและแชต") },
+  { value: text("Easy", "รวดเร็ว"), label: text("phone and chat support", "รองรับโทรและแชต") },
 ];
 
 export const categoryCards = [
@@ -120,7 +120,7 @@ export const categoryCards = [
     slug: "dry-goods",
     title: text("Dry Goods", "อาหารแห้ง"),
     subtitle: text(
-      "Pantry staples and everyday kitchen essentials.",
+      "Pantry staples for everyday cooking.",
       "ข้าว เส้น เครื่องปรุง และของจำเป็นสำหรับครัวที่ควรมีติดบ้าน"
     ),
     image: "/assets/dry.png",
@@ -129,7 +129,7 @@ export const categoryCards = [
       "อาหารแห้งคือสินค้าที่เก็บไว้ได้นานและช่วยให้ครัวพร้อมสำหรับมื้อประจำวันอยู่เสมอ"
     ),
     guideDescription: text(
-      "Dry goods are pantry essentials such as rice, noodles, seasonings, sauces, canned foods, and other shelf-stable ingredients that support everyday cooking at home. Customers usually choose this category when they want long-lasting kitchen basics that are easy to store, simple to use, and helpful for meal planning, quick preparation, and keeping the household ready for daily meals.",
+      "Dry goods include rice, noodles, seasonings, sauces, canned foods, and other shelf-stable ingredients for everyday cooking. This category is useful when you want kitchen basics that are easy to store, simple to use, and ready for regular family meals.",
       "อาหารแห้งคือสินค้าพื้นฐานในตู้กับข้าว เช่น ข้าว เส้นก๋วยเตี๋ยว เครื่องปรุง ซอส อาหารกระป๋อง และวัตถุดิบที่เก็บไว้ได้นาน ซึ่งช่วยรองรับการทำอาหารในชีวิตประจำวัน ลูกค้ามักเลือกหมวดนี้เมื่อต้องการของใช้ในครัวที่เก็บง่าย ใช้งานสะดวก และเหมาะกับการวางแผนมื้ออาหารหรือเตรียมของสำรองไว้ใช้ในบ้าน"
     ),
     whatIs: text(
@@ -164,7 +164,7 @@ export const categoryCards = [
     slug: "drinks",
     title: text("Drinks", "เครื่องดื่ม"),
     subtitle: text(
-      "Soft drinks, juices, and ready-to-go refreshment.",
+      "Water, juices, soft drinks, and ready-to-drink choices.",
       "น้ำดื่ม น้ำผลไม้ น้ำอัดลม และเครื่องดื่มพร้อมดื่มสำหรับทุกวัน"
     ),
     image: "/assets/drink.png",
@@ -173,7 +173,7 @@ export const categoryCards = [
       "หมวดเครื่องดื่มรวมตัวเลือกสำหรับการดื่มประจำวัน ไม่ว่าจะที่บ้าน ที่ทำงาน ระหว่างเดินทาง หรือใช้ร่วมกันในครอบครัว"
     ),
     guideDescription: text(
-      "The drinks category includes bottled water, juices, soft drinks, ready-to-drink tea or coffee, and other beverages chosen for refreshment, convenience, and daily hydration. Customers often use this category to find drinks for home, work, travel, or sharing with family and guests, and they usually choose items by taste, size, sweetness, and the occasion they need the drink for.",
+      "The drinks category includes bottled water, juices, soft drinks, ready-to-drink tea or coffee, and other beverages for daily refreshment. It helps you choose drinks for home, work, travel, or sharing with family and guests.",
       "หมวดเครื่องดื่มรวมทั้งน้ำดื่ม น้ำผลไม้ น้ำอัดลม ชาหรือกาแฟพร้อมดื่ม และเครื่องดื่มอื่น ๆ ที่เหมาะกับการเพิ่มความสดชื่น ความสะดวก และการดื่มในชีวิตประจำวัน ลูกค้ามักเลือกหมวดนี้เพื่อหาเครื่องดื่มสำหรับบ้าน ที่ทำงาน การเดินทาง หรือใช้ร่วมกับครอบครัวและแขก โดยมักตัดสินใจจากรสชาติ ขนาด ความหวาน และโอกาสในการใช้งาน"
     ),
     whatIs: text(
@@ -294,7 +294,7 @@ export const categoryCards = [
   },
   {
     slug: "beauty",
-    title: text("Beauty", "สุขภาพและความงาม"),
+    title: text("Health & Beauty", "สุขภาพและความงาม"),
     subtitle: text(
       "Personal care products and wellness basics.",
       "สบู่ แชมพู ของใช้ส่วนตัว และสินค้าดูแลสุขภาพในชีวิตประจำวัน"
@@ -382,9 +382,9 @@ export const categoryCards = [
   },
   {
     slug: "kitchen-tools",
-    title: text("Kitchen Tools", "ของใช้ในครัวเรือน"),
+    title: text("Kitchen & Household Tools", "ของใช้ในครัวเรือน"),
     subtitle: text(
-      "Useful equipment and household support items.",
+      "Practical items for cooking, storage, and home organization.",
       "อุปกรณ์ครัว กล่องเก็บอาหาร และของใช้ที่ช่วยให้บ้านเป็นระเบียบ"
     ),
     image: "/assets/clean_eqip.png",
@@ -428,7 +428,7 @@ export const categoryCards = [
     slug: "pet-care",
     title: text("Pet Care", "สินค้าสัตว์เลี้ยง"),
     subtitle: text(
-      "Selected supplies for cats, dogs, and more.",
+      "Everyday supplies for cats, dogs, and household pets.",
       "อาหาร ขนม และของใช้จำเป็นสำหรับสุนัข แมว และสัตว์เลี้ยงในบ้าน"
     ),
     image: "/assets/pet.png",
@@ -478,7 +478,7 @@ export const spotlightCards = [
       "ดูโบรชัวร์ล่าสุดก่อนแวะมาเลือกซื้อที่ร้าน"
     ),
     description: text(
-      "Use the brochure page for featured shelves, deal banners, and seasonal product updates.",
+      "Preview featured items, weekly deals, and seasonal product updates before planning your shopping trip.",
       "รวมสินค้าแนะนำ ข้อเสนอประจำสัปดาห์ และรายการน่าสนใจ เพื่อช่วยให้วางแผนซื้อของได้ง่ายขึ้น"
     ),
     image: "/assets/sp-2.png",
@@ -486,13 +486,13 @@ export const spotlightCards = [
     linkLabel: text("Browse brochure", "ดูโบรชัวร์"),
   },
   {
-    eyebrow: text("Fresh promotions", "โปรโมชันใหม่"),
+    eyebrow: text("Latest promotions", "โปรโมชันใหม่"),
     title: text(
       "Check current promotions, weekly deals, and featured items.",
       "ติดตามโปรโมชันและข้อเสนอคุ้มค่าล่าสุด"
     ),
     description: text(
-      "Visit the promotions page to see the latest offers, campaign highlights, and store updates.",
+      "Visit the promotions page to see the latest offers, featured items, and store updates.",
       "รวมสินค้าแนะนำ ข้อเสนอพิเศษ และข่าวสารจากโสภณซุปเปอร์ไว้ให้ลูกค้าติดตามได้สะดวก"
     ),
     image: "/assets/promotion.png",
@@ -502,11 +502,11 @@ export const spotlightCards = [
   {
     eyebrow: text("Order support", "ช่วยเรื่องการสั่งซื้อ"),
     title: text(
-      "Guide shoppers from discovery to pickup in just a few steps.",
+      "Go from product search to pickup in a few simple steps.",
       "สอบถามสินค้าและนัดรับได้สะดวกก่อนเข้ามาที่ร้าน"
     ),
     description: text(
-      "The online shopping page explains how to browse, contact the team, and confirm store pickup.",
+      "Learn how to browse products, contact the store, confirm details, and arrange pickup.",
       "เลือกสินค้าที่สนใจ ติดต่อร้านเพื่อยืนยันรายละเอียด แล้วนัดรับที่โสภณซุปเปอร์ได้อย่างสะดวก"
     ),
     image: "/assets/online.jpg",
@@ -518,7 +518,7 @@ export const spotlightCards = [
 export const serviceSteps = [
   {
     step: "01",
-    title: text("Browse current products", "เลือกสินค้าและโปรโมชันที่สนใจ"),
+    title: text("Browse products and promotions", "เลือกสินค้าและโปรโมชันที่สนใจ"),
     description: text(
       "Start with featured departments, brochure visuals, or the latest promotional cards.",
       "เริ่มจากหมวดสินค้าที่ต้องการ หรือเปิดโบรชัวร์ประจำสัปดาห์เพื่อดูรายการแนะนำ"
@@ -526,7 +526,7 @@ export const serviceSteps = [
   },
   {
     step: "02",
-    title: text("Send your order request", "แจ้งรายการที่ต้องการ"),
+    title: text("Contact the store", "แจ้งรายการที่ต้องการ"),
     description: text(
       "Reach the team by phone or chat to confirm product details, quantities, and availability.",
       "โทรหรือแชตกับร้านเพื่อสอบถามรายละเอียด จำนวนที่ต้องการ และสินค้าพร้อมจำหน่าย"
@@ -570,23 +570,23 @@ export const promotionCards = [
   {
     title: text("Weekly brochure focus", "สินค้าเด่นจากโบรชัวร์"),
     description: text(
-      "Use brochure visuals as the primary campaign block for limited-time deals and featured goods.",
+      "Start with brochure highlights for limited-time deals and featured goods.",
       "รวมรายการสินค้าแนะนำและข้อเสนอประจำสัปดาห์จากโบรชัวร์ล่าสุดของร้าน"
     ),
     image: "/assets/sp-2.png",
   },
   {
-    title: text("In-store campaign banner", "โปรโมชันที่ร้านแนะนำ"),
+    title: text("Recommended in-store offers", "โปรโมชันที่ร้านแนะนำ"),
     description: text(
-      "Keep your key promotional banner large, visible, and easy to reuse across landing sections.",
+      "See offers selected by the store to help you plan better-value shopping.",
       "โปรโมชันที่ร้านคัดสรรมาเป็นพิเศษ ช่วยให้ลูกค้าวางแผนซื้อของได้คุ้มค่าขึ้น"
     ),
     image: "/assets/sp-3.png",
   },
   {
-    title: text("Seasonal visual slot", "ข้อเสนอพิเศษตามฤดูกาล"),
+    title: text("Seasonal offers", "ข้อเสนอพิเศษตามฤดูกาล"),
     description: text(
-      "Reserve a third panel for festival offers, household bundles, or new arrival campaigns.",
+      "Look for festival offers, household bundles, and new arrivals during special periods.",
       "พบสินค้าเข้าใหม่ ชุดสินค้าคุ้มค่า และข้อเสนอพิเศษในช่วงเทศกาล"
     ),
     image: "/assets/sp-3-2.png",
@@ -595,7 +595,7 @@ export const promotionCards = [
 
 export const shoppingChannels = [
   {
-    title: text("Phone order", "โทรสั่งซื้อ"),
+    title: text("Phone support", "โทรสั่งซื้อ"),
     description: text(
       "Call the team for product checks, pickup coordination, and direct support during store hours.",
       "โทรสอบถามสินค้า ราคาเบื้องต้น หรือการนัดรับสินค้าได้ในช่วงเวลาเปิดร้าน"
@@ -617,7 +617,7 @@ export const shoppingChannels = [
   {
     title: text("Facebook updates", "Facebook"),
     description: text(
-      "Share news, promotions, and store announcements through a familiar social channel.",
+      "Follow store news, promotions, and announcements through a familiar social channel.",
       "ติดตามข่าวสาร โปรโมชัน และประกาศจากร้านได้ทาง Facebook"
     ),
     action: text("Open Facebook page", "เปิดหน้า Facebook"),
@@ -628,25 +628,25 @@ export const shoppingChannels = [
 
 export const brochurePanels = [
   {
-    title: text("Main brochure cover", "โบรชัวร์ประจำสัปดาห์"),
+    title: text("Weekly brochure", "โบรชัวร์ประจำสัปดาห์"),
     description: text(
-      "A strong hero visual for your weekly selection and featured categories.",
+      "Start with the latest brochure to see featured products and weekly offers.",
       "รวมภาพรวมโปรโมชันและสินค้าเด่นประจำสัปดาห์ไว้ให้ดูได้ง่าย"
     ),
     image: "/assets/sp-2.png",
   },
   {
-    title: text("Promotion banner", "โปรโมชันแนะนำ"),
+    title: text("Recommended promotions", "โปรโมชันแนะนำ"),
     description: text(
-      "Reuse this format for rotating promotions or limited-time campaigns.",
+      "Look for selected deals and limited-time offers from the store.",
       "ข้อเสนอที่ร้านคัดมาแนะนำเป็นพิเศษในช่วงนี้"
     ),
     image: "/assets/sp-3.png",
   },
   {
-    title: text("Seasonal alternate", "สินค้าตามฤดูกาล"),
+    title: text("Seasonal picks", "สินค้าตามฤดูกาล"),
     description: text(
-      "Add a second feature slot to keep the brochure page feeling current.",
+      "Check products and promotions that match the season or special occasions.",
       "ติดตามสินค้าและโปรโมชันที่เหมาะกับช่วงเทศกาลหรือฤดูกาลต่าง ๆ"
     ),
     image: "/assets/sp-3-2.png",
@@ -656,7 +656,7 @@ export const brochurePanels = [
 export const homePageContent = {
   heroEyebrow: text("Fresh picks for every day", "ซูเปอร์มาร์เก็ตคู่บ้าน"),
   heroTitle: text(
-    "Fresh groceries, household essentials, and weekly deals at Sophon Supermarket.",
+    "Fresh groceries, household essentials, and weekly deals for your family.",
     "โสภณซุปเปอร์ ครบทั้งสินค้าอุปโภคบริโภคและโปรโมชันคุ้มค่าสำหรับครอบครัว"
   ),
   heroLead: text(
@@ -680,16 +680,16 @@ export const homePageContent = {
   supportCallCta: text("Call now", "โทรเลย"),
   highlightEyebrow: text("This week's highlights", "ไฮไลต์ประจำสัปดาห์"),
   highlightTitle: text(
-    "Brochure, promotions, and ordering support in one place.",
+    "Brochures, promotions, and order support in one place.",
     "โบรชัวร์ โปรโมชัน และช่องทางสั่งซื้อ รวมไว้ในที่เดียว"
   ),
   highlightDescription: text(
-    "Check the latest offers, featured products, and quick store actions from the homepage.",
+    "Check current offers, featured products, and useful store links from the homepage.",
     "ติดตามข้อเสนอประจำสัปดาห์ สินค้าแนะนำ และช่องทางติดต่อร้านได้อย่างรวดเร็ว"
   ),
   categoriesEyebrow: text("Popular departments", "หมวดหมู่ยอดนิยม"),
   categoriesTitle: text(
-    "Selected categories at a glance",
+    "Popular categories at a glance",
     "หมวดสินค้ายอดนิยมของลูกค้า"
   ),
   categoriesAction: text("Browse all departments", "ดูหมวดทั้งหมด"),
@@ -699,17 +699,17 @@ export const homePageContent = {
   ),
   orderingEyebrow: text("Ordering flow", "ขั้นตอนการสั่งซื้อ"),
   orderingTitle: text(
-    "A simpler path from promotion to pickup",
+    "Choose products, contact the store, and arrange pickup",
     "เลือกสินค้า ติดต่อร้าน และนัดรับได้สะดวก"
   ),
   orderingDescription: text(
-    "Check products, contact the team, and confirm pickup in a few simple steps.",
+    "Browse products or promotions, then contact the store to confirm availability and pickup details.",
     "เลือกสินค้าหรือโปรโมชันที่สนใจ แล้วติดต่อร้านเพื่อสอบถามรายละเอียดหรือนัดรับสินค้า"
   ),
   visitEyebrow: text("Visit the store", "แวะมาที่ร้าน"),
   visitTitle: text("Sophon Supermarket", "โสภณซุปเปอร์"),
   visitDescription: text(
-    "Find store details, contact channels, and directions before heading to Sophon Supermarket.",
+    "Check the address, opening hours, contact channels, and map before you visit.",
     "ตรวจสอบที่อยู่ เวลาเปิดทำการ ช่องทางติดต่อ และเส้นทางก่อนเดินทางมาที่ร้าน"
   ),
   visitContact: text("Contact options", "ช่องทางติดต่อ"),
@@ -724,11 +724,11 @@ export const homePageContent = {
 export const productsPageContent = {
   heroEyebrow: text("Category guides", "หมวดสินค้า"),
   heroTitle: text(
-    "Browse the main category guides at Sophon Supermarket.",
+    "Browse the main product categories at Sophon Supermarket.",
     "รวมหมวดสินค้าหลักของโสภณซุปเปอร์ไว้ให้เลือกดูง่าย"
   ),
   heroDescription: text(
-    "Explore each department through readable guide pages before you visit the store.",
+    "Use these guides to understand each department and plan your shopping before you visit.",
     "ดูตัวอย่างสินค้าในแต่ละหมวด เพื่อช่วยวางแผนการซื้อของก่อนแวะมาที่ร้าน"
   ),
   brochureCta: text("View brochure", "ดูโบรชัวร์"),
@@ -736,12 +736,12 @@ export const productsPageContent = {
   categoriesEyebrow: text("Departments", "หมวดสินค้า"),
   categoriesTitle: text("Main category guides", "หมวดสินค้าหลัก"),
   categoriesDescription: text(
-    "Choose a department card to open a category guide with useful details and shopping context.",
+    "Choose a department to see examples, buying tips, and useful shopping information.",
     "เลือกหมวดสินค้าที่สนใจ เพื่อดูตัวอย่างสินค้าและคำแนะนำก่อนเลือกซื้อ"
   ),
   strengthsEyebrow: text("Store strengths", "จุดเด่นของร้าน"),
   strengthsTitle: text(
-    "Built to support product discovery and store trust",
+    "Clear product information before you visit",
     "ช่วยให้ลูกค้าดูข้อมูลสินค้าและติดต่อร้านได้ง่ายก่อนมาเลือกซื้อ"
   ),
   helpEyebrow: text("Need help choosing?", "ต้องการสอบถามสินค้า?"),
@@ -753,7 +753,7 @@ export const productsPageContent = {
   searchEyebrow: text("Filtered browse", "ผลการค้นหา"),
   searchTitle: text("Showing departments for", "ผลลัพธ์หมวดสินค้าสำหรับ"),
   searchDescription: text(
-    "Use the quick search in the header to jump into the category information list faster.",
+    "Search results are based on department names, product examples, and category descriptions.",
     "ใช้ช่องค้นหาด้านบนเพื่อดูหมวดสินค้าที่เกี่ยวข้องได้เร็วขึ้น"
   ),
   searchCountLabel: text("matching category guides", "หมวดสินค้าที่เกี่ยวข้อง"),
@@ -794,38 +794,38 @@ export const promotionsPageContent = {
     "รวมโปรโมชันล่าสุด ข้อเสนอประจำสัปดาห์ และสินค้าแนะนำ"
   ),
   heroDescription: text(
-    "Use this page to highlight campaign banners, brochure items, and seasonal promotions.",
+    "Check the latest store offers, brochure highlights, and seasonal deals before you shop.",
     "ติดตามข้อเสนอจากโบรชัวร์ สินค้าเด่น และโปรโมชันประจำช่วงเวลาของโสภณซุปเปอร์"
   ),
   brochureCta: text("Open brochure", "เปิดโบรชัวร์"),
   productsCta: text("Browse departments", "ดูหมวดสินค้า"),
-  slotsEyebrow: text("Campaign slots", "โปรโมชันแนะนำ"),
-  slotsTitle: text("Reusable promotion blocks", "ข้อเสนอแนะนำสำหรับลูกค้า"),
+  slotsEyebrow: text("Featured offers", "โปรโมชันแนะนำ"),
+  slotsTitle: text("Deals and highlights to check first", "ข้อเสนอแนะนำสำหรับลูกค้า"),
   slotsDescription: text(
-    "These sections make it easier to keep weekly news, featured products, and seasonal promotions visible.",
+    "Find weekly news, recommended products, and seasonal promotions in one easy section.",
     "ติดตามสินค้าเด่น ข่าวสารประจำสัปดาห์ และโปรโมชันพิเศษที่ไม่ควรพลาด"
   ),
-  slotLink: text("Use this on brochure page", "ดูโบรชัวร์ล่าสุด"),
+  slotLink: text("View latest brochure", "ดูโบรชัวร์ล่าสุด"),
   rhythmEyebrow: text("Update rhythm", "อัปเดตจากร้าน"),
   rhythmTitle: text(
-    "Brochure, banner, and category highlights now work together as one campaign system.",
+    "Plan your shopping with the latest brochure and promotions.",
     "ดูโบรชัวร์และโปรโมชันล่าสุดก่อนเข้ามาซื้อของ"
   ),
   rhythmDescription: text(
-    "Keep brochure offers, banners, and category highlights grouped in one easy place.",
+    "Review current offers and featured items together so it is easier to decide what to buy.",
     "ร้านรวบรวมข้อเสนอและสินค้าแนะนำไว้ให้ดูง่าย ช่วยให้วางแผนซื้อของได้สะดวกขึ้น"
   ),
   contactCta: text("Contact the store", "ติดต่อร้าน"),
 };
 
 export const shoppingPageContent = {
-  heroEyebrow: text("Online shopping", "สั่งซื้อออนไลน์"),
+  heroEyebrow: text("How to order", "สั่งซื้อออนไลน์"),
   heroTitle: text(
-    "Clear ordering steps with faster paths to phone and chat support.",
+    "Check products, contact the store, and arrange pickup.",
     "สอบถามสินค้าและนัดรับได้สะดวกผ่านโทรศัพท์หรือแชต"
   ),
   heroDescription: text(
-    "Follow the ordering steps, contact the team, and arrange store pickup more easily.",
+    "Use these steps to ask about products, confirm availability, and prepare your pickup at Sophon Supermarket.",
     "เลือกสินค้าที่สนใจ ติดต่อร้านเพื่อยืนยันรายละเอียด แล้วนัดรับสินค้าที่โสภณซุปเปอร์ได้ง่าย"
   ),
   contactCta: text("Contact the team", "ติดต่อร้าน"),
@@ -838,7 +838,7 @@ export const shoppingPageContent = {
   ),
   channelsEyebrow: text("Support channels", "ช่องทางการสั่งซื้อ"),
   channelsTitle: text(
-    "Choose the contact method that works best for the customer",
+    "Choose the contact method that works best for you",
     "เลือกช่องทางที่สะดวกที่สุดในการติดต่อโสภณซุปเปอร์"
   ),
 };
@@ -856,7 +856,7 @@ export const contactPageContent = {
   mapsCta: text("Open Google Maps", "เปิด Google Maps"),
   supportEyebrow: text("Support options", "ช่องทางติดต่อ"),
   supportTitle: text(
-    "Reach the team through the channel that fits the request",
+    "Choose the channel that fits your request",
     "เลือกช่องทางติดต่อที่เหมาะกับสิ่งที่ต้องการสอบถาม"
   ),
   locationEyebrow: text("Store location", "ที่ตั้งร้าน"),
@@ -866,7 +866,7 @@ export const contactPageContent = {
 export const brochurePageContent = {
   heroEyebrow: text("Online brochure", "โบรชัวร์ออนไลน์"),
   heroTitle: text(
-    "Browse brochure visuals and featured weekly offers.",
+    "Browse the latest brochure and weekly offers.",
     "ดูโบรชัวร์ล่าสุดและข้อเสนอประจำสัปดาห์"
   ),
   heroDescription: text(
@@ -876,13 +876,13 @@ export const brochurePageContent = {
   promotionsCta: text("See promotions", "ดูโปรโมชัน"),
   productsCta: text("Browse products", "ดูสินค้า"),
   galleryEyebrow: text("Brochure gallery", "รายการในโบรชัวร์"),
-  galleryTitle: text("Promotion-ready visuals", "โปรโมชันและรายการแนะนำ"),
+  galleryTitle: text("Featured brochure sections", "โปรโมชันและรายการแนะนำ"),
   galleryDescription: text(
-    "Use these blocks for brochure pages, campaign slots, or featured category banners.",
+    "Review brochure images, promotions, and featured items recommended by the store.",
     "เลือกดูภาพโบรชัวร์ โปรโมชัน และสินค้าเด่นที่ร้านแนะนำในช่วงนี้"
   ),
   panelEyebrow: text("Brochure section", "โบรชัวร์"),
-  panelLink: text("Use this in campaigns", "ดูรายละเอียด"),
+  panelLink: text("View details", "ดูรายละเอียด"),
   openPdf: text("Open PDF", "เปิด PDF"),
   openImage: text("Open image", "เปิดรูป"),
 };

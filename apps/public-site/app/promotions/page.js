@@ -7,12 +7,11 @@ import { PageHero } from "@sophon/shared/components/site/page-hero";
 import { PromotionsShowcase } from "@sophon/shared/components/site/promotions-showcase";
 import { SectionHeading } from "@sophon/shared/components/site/section-heading";
 import { StoreLayout } from "@sophon/shared/components/site/store-layout";
-import { brochureLinkHref, localize, promotionCards, promotionsPageContent } from "@sophon/shared/lib/site-content";
+import { brochureLinkHref, localize, promotionsPageContent } from "@sophon/shared/lib/site-content";
 
 export default function PromotionsPage() {
   const { language } = useLanguage();
   const content = localize(promotionsPageContent, language);
-  const cards = localize(promotionCards, language);
 
   return (
     <StoreLayout>
@@ -34,7 +33,7 @@ export default function PromotionsPage() {
           description={content.slotsDescription}
         />
 
-        <PromotionsShowcase language={language} content={content} fallbackCards={cards} />
+        <PromotionsShowcase language={language} content={content} />
       </section>
 
       <section className="section shell promo-band">

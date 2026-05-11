@@ -156,11 +156,27 @@ function shouldUseOfflineFallback(error) {
   return isNetworkFetchError(error);
 }
 
+function createOnlineSaveRequiredError(contentType, originalError) {
+  const error = new Error(
+    `${contentType} could not be saved to the online database. Please check the internet connection and Supabase setup, then try again.`
+  );
+  error.cause = originalError;
+  return error;
+}
+
 export function getReadableContentError(error, fallbackText) {
   const message = String(error?.message || error?.error_description || "").trim();
 
   if (!message) {
     return fallbackText;
+  }
+
+  if (
+    message.toLowerCase().includes("quota") ||
+    message.toLowerCase().includes("exceeded the quota") ||
+    message.toLowerCase().includes("setting the value")
+  ) {
+    return "The browser storage is full, so this item was not uploaded online. Please check the online database connection and save again.";
   }
 
   if (message.toLowerCase().includes("failed to fetch")) {
@@ -336,7 +352,7 @@ export function normalizePublishedBrochures(items) {
     .filter((item) => {
       const hasAsset = String(item?.file_url || item?.image || "").trim();
       const hasTitle = String(item?.title || "").trim();
-      return Boolean(hasAsset && hasTitle && isPublishedDate(item?.display_date || item?.date));
+      return Boolean(hasAsset && hasTitle);
     })
     .sort((a, b) => String(b?.display_date || b?.date || "").localeCompare(String(a?.display_date || a?.date || "")));
 }
@@ -369,6 +385,14 @@ function setOfflineBrochures(items) {
 
 function createOfflineId(prefix) {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+function isLocalPromotionId(id) {
+  return String(id || "").startsWith("local-promotion");
+}
+
+function isLocalBrochureId(id) {
+  return String(id || "").startsWith("local-brochure");
 }
 
 function getPromotionIdentityKey(item) {
@@ -412,24 +436,14 @@ function mergeContentItems(primaryItems, secondaryItems, getKey) {
 }
 
 function createPromotionPayloadOptions(payload) {
-  return [
-    payload,
-    {
-      kind: payload.kind,
-      title: payload.title,
-      image_url: payload.image_url,
-      summary: payload.summary,
-      details: payload.details,
-      publish_date: payload.publish_date,
-    },
-    {
-      kind: payload.kind,
-      title: payload.title,
-      image: payload.image_url,
-      summary: payload.summary,
-      publish_date: payload.publish_date,
-    },
-  ];
+  const compactPayload = Object.fromEntries(
+    Object.entries(payload).filter(([, value]) => value !== undefined && value !== null)
+  );
+
+  const withoutDetails = { ...compactPayload };
+  delete withoutDetails.details;
+
+  return [compactPayload, withoutDetails];
 }
 
 function createBrochurePayloadOptions(payload) {
@@ -652,22 +666,12 @@ async function fetchBrochureStorageRecord(id) {
 }
 
 export async function fetchPromotions() {
-  const offlineItems = getOfflinePromotions();
-
-  try {
-    const data = await requestJson("/rest/v1/promotions?select=*&order=publish_date.desc");
-    return mergeContentItems(Array.isArray(data) ? data : [], offlineItems, getPromotionIdentityKey);
-  } catch (error) {
-    if (shouldUseOfflineFallback(error)) {
-      return offlineItems;
-    }
-
-    throw error;
-  }
+  const data = await requestJson("/rest/v1/promotions?select=*&order=publish_date.desc");
+  return Array.isArray(data) ? data : [];
 }
 
 export async function savePromotion({ id, currentItem, kind, title, summary, details, publishDate, file, previewDataUrl }) {
-  const isEditing = Boolean(id);
+  const isEditing = Boolean(id) && !isLocalPromotionId(id);
   let uploaded = null;
   const existingImageUrl = String(currentItem?.image_url || currentItem?.image || "").trim();
   const existingImagePath =
@@ -731,31 +735,7 @@ export async function savePromotion({ id, currentItem, kind, title, summary, det
     }
 
     if (shouldUseOfflineFallback(error)) {
-      const offlineImage = file ? previewDataUrl || (await fileToDataUrl(file)) : existingImageUrl;
-      const offlineItems = getOfflinePromotions();
-      const nextItem = {
-        ...(currentItem || {}),
-        id: id || createOfflineId("local-promotion"),
-        kind,
-        title,
-        summary,
-        details,
-        publish_date: publishDate,
-        image_url: offlineImage,
-        image: offlineImage,
-        image_name: file?.name || currentItem?.image_name || "",
-        offline: true,
-      };
-      const existingIndex = offlineItems.findIndex((item) => String(item.id) === String(nextItem.id));
-
-      if (existingIndex >= 0) {
-        offlineItems[existingIndex] = nextItem;
-      } else {
-        offlineItems.unshift(nextItem);
-      }
-
-      setOfflinePromotions(offlineItems);
-      return { mode: "offline", item: nextItem };
+      throw createOnlineSaveRequiredError("Promotion", error);
     }
 
     throw error;
@@ -764,12 +744,13 @@ export async function savePromotion({ id, currentItem, kind, title, summary, det
 
 export async function deletePromotion(id) {
   const offlineItems = getOfflinePromotions();
+  if (isLocalPromotionId(id)) {
+    setOfflinePromotions(offlineItems.filter((item) => String(item.id) !== String(id)));
+    return { mode: "offline" };
+  }
+
   if (offlineItems.some((item) => String(item.id) === String(id))) {
     setOfflinePromotions(offlineItems.filter((item) => String(item.id) !== String(id)));
-
-    if (String(id).startsWith("local-promotion")) {
-      return { mode: "offline" };
-    }
   }
 
   const existing = await fetchPromotionStorageRecord(id);
@@ -792,22 +773,12 @@ export async function deletePromotion(id) {
 }
 
 export async function fetchBrochures() {
-  const offlineItems = getOfflineBrochures();
-
-  try {
-    const data = await requestJson("/rest/v1/brochures?select=*&order=display_date.desc");
-    return mergeContentItems(Array.isArray(data) ? data : [], offlineItems, getBrochureIdentityKey);
-  } catch (error) {
-    if (shouldUseOfflineFallback(error)) {
-      return offlineItems;
-    }
-
-    throw error;
-  }
+  const data = await requestJson("/rest/v1/brochures?select=*&order=display_date.desc");
+  return Array.isArray(data) ? data : [];
 }
 
 export async function saveBrochure({ id, currentItem, title, displayDate, file, driveUrl }) {
-  const isEditing = Boolean(id);
+  const isEditing = Boolean(id) && !isLocalBrochureId(id);
   let uploaded = null;
   const normalizedDriveUrl = String(driveUrl || "").trim();
   const existingFileUrl = String(currentItem?.file_url || currentItem?.image || "").trim();
@@ -882,37 +853,7 @@ export async function saveBrochure({ id, currentItem, title, displayDate, file, 
     }
 
     if (shouldUseOfflineFallback(error)) {
-      const offlineItems = getOfflineBrochures();
-      let localFileUrl = normalizedDriveUrl ? createGoogleDriveOpenUrl(normalizedDriveUrl) : existingFileUrl;
-      let localFileType = normalizedDriveUrl ? "application/pdf" : currentItem?.file_type || "";
-      let localFileName = normalizedDriveUrl ? title : currentItem?.file_name || "";
-
-      if (!normalizedDriveUrl && file) {
-        localFileUrl = await fileToDataUrl(file);
-        localFileType = file.type;
-        localFileName = file.name;
-      }
-
-      const nextItem = {
-        ...(currentItem || {}),
-        id: id || createOfflineId("local-brochure"),
-        title,
-        file_url: localFileUrl,
-        file_type: localFileType,
-        file_name: localFileName,
-        display_date: displayDate,
-        offline: true,
-      };
-      const existingIndex = offlineItems.findIndex((item) => String(item.id) === String(nextItem.id));
-
-      if (existingIndex >= 0) {
-        offlineItems[existingIndex] = nextItem;
-      } else {
-        offlineItems.unshift(nextItem);
-      }
-
-      setOfflineBrochures(offlineItems);
-      return { mode: "offline", item: nextItem };
+      throw createOnlineSaveRequiredError("Brochure", error);
     }
 
     throw error;
@@ -921,12 +862,13 @@ export async function saveBrochure({ id, currentItem, title, displayDate, file, 
 
 export async function deleteBrochure(id) {
   const offlineItems = getOfflineBrochures();
+  if (isLocalBrochureId(id)) {
+    setOfflineBrochures(offlineItems.filter((item) => String(item.id) !== String(id)));
+    return { mode: "offline" };
+  }
+
   if (offlineItems.some((item) => String(item.id) === String(id))) {
     setOfflineBrochures(offlineItems.filter((item) => String(item.id) !== String(id)));
-
-    if (String(id).startsWith("local-brochure")) {
-      return { mode: "offline" };
-    }
   }
 
   const existing = await fetchBrochureStorageRecord(id);

@@ -134,30 +134,9 @@ function normalizePromotionItems(items) {
   );
 }
 
-function parseContentDate(value) {
-  if (!value) {
-    return null;
-  }
-
-  const date = new Date(`${value}T00:00:00`);
-  return Number.isNaN(date.getTime()) ? null : date;
-}
-
 function resolvePromotionStatus(item, content) {
   if (item.offline) {
     return { tone: "draft", label: content.shared.localStatus };
-  }
-
-  const date = parseContentDate(item.publish_date || item.date || "");
-  if (!date) {
-    return { tone: "draft", label: content.shared.draftStatus };
-  }
-
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  if (date.getTime() > today.getTime()) {
-    return { tone: "draft", label: content.shared.draftStatus };
   }
 
   return { tone: "active", label: content.shared.activeStatus };
@@ -165,6 +144,64 @@ function resolvePromotionStatus(item, content) {
 
 function getPromotionPreviewHref(item) {
   return String(item.image_url || item.image || "").trim();
+}
+
+function canvasToBlob(canvas, type, quality) {
+  return new Promise((resolve) => {
+    canvas.toBlob(resolve, type, quality);
+  });
+}
+
+async function preparePromotionImage(file) {
+  const imageType = String(file.type || "").toLowerCase();
+
+  if (!imageType.startsWith("image/")) {
+    return file;
+  }
+
+  const image = new Image();
+  const objectUrl = URL.createObjectURL(file);
+
+  try {
+    await new Promise((resolve, reject) => {
+      image.onload = resolve;
+      image.onerror = reject;
+      image.src = objectUrl;
+    });
+
+    const maxDimension = 1600;
+    const scale = Math.min(1, maxDimension / Math.max(image.naturalWidth || 1, image.naturalHeight || 1));
+    const width = Math.max(1, Math.round((image.naturalWidth || 1) * scale));
+    const height = Math.max(1, Math.round((image.naturalHeight || 1) * scale));
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+
+    if (!context) {
+      return file;
+    }
+
+    canvas.width = width;
+    canvas.height = height;
+    context.drawImage(image, 0, 0, width, height);
+
+    const outputType = imageType === "image/png" ? "image/png" : "image/jpeg";
+    const blob = await canvasToBlob(canvas, outputType, 0.86);
+
+    if (!blob || blob.size >= file.size) {
+      return file;
+    }
+
+    const extension = outputType === "image/png" ? "png" : "jpg";
+    const baseName = file.name.replace(/\.[^.]+$/, "") || "promotion";
+    return new File([blob], `${baseName}.${extension}`, {
+      type: outputType,
+      lastModified: Date.now(),
+    });
+  } catch {
+    return file;
+  } finally {
+    URL.revokeObjectURL(objectUrl);
+  }
 }
 
 export function StaffPromotionsManager() {
@@ -239,14 +276,16 @@ export function StaffPromotionsManager() {
       return;
     }
 
-    setFormValue((current) => ({ ...current, file }));
     setFieldErrors((current) => ({ ...current, file: "" }));
 
     try {
-      const nextPreview = await fileToDataUrl(file);
+      const preparedFile = await preparePromotionImage(file);
+      const nextPreview = await fileToDataUrl(preparedFile);
+      setFormValue((current) => ({ ...current, file: preparedFile }));
       setPreviewSrc(nextPreview);
       setFeedback({ tone: "info", message: content.shared.previewReady });
     } catch {
+      setFormValue((current) => ({ ...current, file: null }));
       setPreviewSrc("");
       setFeedback({ tone: "error", message: content.shared.previewFailed });
     }
@@ -290,7 +329,7 @@ export function StaffPromotionsManager() {
       nextErrors.title = content.form.errors.title;
     }
 
-    if (!previewSrc && !formValue.file) {
+    if ((!previewSrc && !formValue.file) || (editingItem?.offline && !formValue.file)) {
       nextErrors.file = content.form.errors.file;
     }
 

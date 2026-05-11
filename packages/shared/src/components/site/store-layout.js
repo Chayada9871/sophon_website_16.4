@@ -12,7 +12,7 @@ function HeaderFallback() {
             <span className="brand-mark" />
             <span className="brand-copy">
               <strong>Sophon Market</strong>
-              <span>Fresh picks, weekly deals, and store support</span>
+              <span>Everyday groceries, weekly deals, and store support</span>
             </span>
           </div>
         </div>
